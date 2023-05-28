@@ -51,11 +51,14 @@ const cardArray = [
 
 cardArray.sort(() => 0.5 - Math.random())
 
-const gridDisplay = document.querySelector('#grid')
-const resultId = document.querySelector('#result')
+let gridDisplay = document.querySelector('#grid')
+let resultId = document.querySelector('#result')
+const startAgainBtn = document.querySelector('#reset-cards')
+startAgainBtn.addEventListener('click', startAgain)
 let cardChosen = []
 let cardChosenIds = []
-const cardsWon = []
+let cardsWon = []
+
 function createBoard() {
     for( let i =0 ; i< cardArray.length; i++){
         const card = document.createElement('img')
@@ -66,8 +69,6 @@ function createBoard() {
 
     }
 }
-
-createBoard()
 
 function checkMatch() {
     const cards = document.querySelectorAll('img')
@@ -114,3 +115,24 @@ function flipCard() {
         setTimeout(checkMatch, 900)
     }
 }
+function sortCards(){
+    cardArray.sort(() => 0.5 - Math.random())
+}
+function clearBoard() {
+    console.log("Clearing the board...")
+    all_images = document.querySelectorAll('img')
+    for (let index = 0; index < all_images.length; index++) {
+        gridDisplay.removeChild(all_images[index])
+    }
+    cardChosen = []
+    cardChosenIds = []
+    cardsWon = []
+}
+
+function startAgain(){
+    clearBoard()
+    console.log("Creating the grid again..")
+    createBoard()
+
+}
+createBoard()
